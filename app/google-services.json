@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "119423700821",
+    "project_id": "aplikacija-za-ucenje",
+    "storage_bucket": "aplikacija-za-ucenje.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119423700821:android:76715521f55e48bdc869dc",
+        "android_client_info": {
+          "package_name": "ba.sum.fpmoz.aplikacijazaucenje"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119423700821-jfmvr1qrdhq4elh5m2q8vo85kqhk70ds.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUWp9wZRHFcqPRZPVxKauuD_WGBd-jLwk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119423700821-jfmvr1qrdhq4elh5m2q8vo85kqhk70ds.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
