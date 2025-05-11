@@ -14,7 +14,9 @@ import com.google.firebase.auth.FirebaseAuth
 fun LoginScreen(
     onLoginSuccess: () -> Unit,
     onGoToRegister: () -> Unit,
-    onGoogleLogin: () -> Unit // Dodano za Google login
+    onGoogleLogin: () -> Unit,
+    onForgotPassword: () -> Unit,
+    onGoogleLoginSuccess: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -44,6 +46,16 @@ fun LoginScreen(
             modifier = Modifier.fillMaxWidth()
         )
 
+        Spacer(modifier = Modifier.height(8.dp))
+
+        Text(
+            text = "Zaboravljena lozinka?",
+            color = MaterialTheme.colorScheme.primary,
+            modifier = Modifier
+                .align(Alignment.End)
+                .clickable { onForgotPassword() }
+        )
+
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
@@ -68,7 +80,10 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(
-            onClick = onGoogleLogin,
+            onClick = {
+                onGoogleLogin()
+                onGoogleLoginSuccess()
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Prijava putem Googlea")

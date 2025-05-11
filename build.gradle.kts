@@ -1,4 +1,4 @@
-// ✅ Ovo mora biti prvo – buildscript za Firebase plugin
+// ✅ Firebase i ostali classpath pluginovi
 buildscript {
     repositories {
         google()
@@ -9,8 +9,9 @@ buildscript {
     }
 }
 
-// ✅ Pluginovi koje koristiš preko version catalog-a
+// ✅ Pluginovi korišteni u modulima (via version catalog)
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.google.gms) apply false // ako si ga definirao u toml-u
 }

@@ -8,11 +8,14 @@ import androidx.navigation.compose.rememberNavController
 object Routes {
     const val LOGIN = "login"
     const val REGISTER = "register"
+    const val FORGOT_PASSWORD = "forgot_password"
+    const val HOME = "home"
 }
 
 @Composable
 fun AppNavigation(
-    onGoogleLogin: () -> Unit = {}  // 🟢 dodan parametar za Google login
+    onGoogleLogin: () -> Unit = {},
+    onGoogleLoginSuccess: (navigateToHome: () -> Unit) -> Unit = {}
 ) {
     val navController = rememberNavController()
 
@@ -21,14 +24,26 @@ fun AppNavigation(
         composable(Routes.LOGIN) {
             LoginScreen(
                 onLoginSuccess = {
-                    // 🔜 TODO: Kad napraviš HomeScreen ovdje ide navigacija
-                    // navController.navigate("home")
+                    navController.navigate(Routes.HOME) {
+                        popUpTo(Routes.LOGIN) { inclusive = true }
+                    }
                 },
                 onGoToRegister = {
                     navController.navigate(Routes.REGISTER)
                 },
                 onGoogleLogin = {
-                    onGoogleLogin() // 🟢 pokreni Google login iz MainActivity
+                    onGoogleLogin()
+                },
+                onForgotPassword = {
+                    navController.navigate(Routes.FORGOT_PASSWORD)
+                },
+                onGoogleLoginSuccess = {
+                    // Kad se pozove iz MainActivity -> navigiraj
+                    onGoogleLoginSuccess {
+                        navController.navigate(Routes.HOME) {
+                            popUpTo(Routes.LOGIN) { inclusive = true }
+                        }
+                    }
                 }
             )
         }
@@ -42,6 +57,24 @@ fun AppNavigation(
                 },
                 onGoToLogin = {
                     navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Routes.FORGOT_PASSWORD) {
+            ForgotPasswordScreen(
+                onBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(Routes.HOME) {
+            HomeScreen(
+                onLogout = {
+                    navController.navigate(Routes.LOGIN) {
+                        popUpTo(Routes.HOME) { inclusive = true }
+                    }
                 }
             )
         }
