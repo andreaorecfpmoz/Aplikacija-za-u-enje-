@@ -63,11 +63,14 @@ class MainActivity : ComponentActivity() {
             AplikacijaZaUcenjeTheme {
                 AppNavigation(
                     onGoogleLogin = {
-                        val signInIntent = googleSignInClient.signInIntent
-                        googleSignInLauncher.launch(signInIntent)
+                        // ➕ Sign out prije pokretanja logina – omogućava izbor računa
+                        googleSignInClient.signOut().addOnCompleteListener {
+                            val signInIntent = googleSignInClient.signInIntent
+                            googleSignInLauncher.launch(signInIntent)
+                        }
                     },
                     onGoogleLoginSuccess = { navFunc ->
-                        navigateToHome = navFunc // 🔁 Spremi funkciju za kasnije
+                        navigateToHome = navFunc
                     }
                 )
             }
